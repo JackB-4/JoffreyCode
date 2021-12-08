@@ -126,7 +126,7 @@ async def on_message(message):
   for word in sleepTriggers:
     if word in message.content.lower() and authorId in verifiedUsers:
       await message.channel.send(random.choice(positiveSleep))
-    elif word in message.content.lower() and "sleepy_figg" not in message.content.lower():
+    elif word in message.content.lower() and "figg" not in message.content.lower():
       await message.channel.send(negativeSleep[int(client.anger)])
 
 #Swear Jar Chat
