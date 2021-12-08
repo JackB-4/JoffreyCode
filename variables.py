@@ -1,3 +1,5 @@
+joffrey = "joffrey"
+
 #Sleep Variables
 sleepTriggers = ["sleep", "tired", "bed", "goodnight", "gn", "good night", "nap"]
 positiveSleep = ["I hope your rest is fulfilling, sir.", "Sleep well, my liege.", "I will fervently await your awakening."]
@@ -37,9 +39,13 @@ unsupportiveResponse = ["No.", "No.", "No.", "Absolutely not.", "Absolutely not.
 
 
 #Swear Jar Variables
-badWords = ["fuck", "shit", "bitch", "asshole", "hell", "nigga", "whore", "slut"]
+badWords = ["fuck", "shit", "bitch", "asshole", "hell", "nigga", "whore", "slut", "nigger"]
 strangerResponse = ["Profanity is strictly disallowed in this server.", "Profanity is strictly disallowed in this server.",
   "Profanity is strictly disallowed in this server.", "I will not tolerate the use of such language.", 
   "I will not tolerate the use of such language.", "I will not tolerate the use of such language.", "Language. There are children!", 
   "Language. There are children!", "Such insolence!", "Such insolence!", "That's it. You don't get your allowance this week."]
 respectfulResponse = ["Such insight.", "What wisdom.", "Your eloquence amazes me."]
+
+#Anger Variables
+resetTriggers = ["reset hypnosis","hypnosis reset", "joffrey, factory reset", "joffrey factory reset","factory reset joffrey", "joffrey reboot", "joffrey, reboot"]
+angerInquiry = ["how angry are you joffrey", "joffrey are you angry", "are you angry joffrey", "is joffrey angy"]

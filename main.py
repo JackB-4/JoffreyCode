@@ -1,11 +1,11 @@
 import discord
-import os
+import asyncio
 import requests
 import json
 import random
-import threading,time,sys
 from variables import *
 token = "OTE1Nzk1NTc4ODg0MDk2MDQx.YagzGA.n58O2SJKo4okdf5idZbbeUW-ZCo"
+verifiedUsers = [376158252330647553,285231967048302594]
 
 client = discord.Client()
 client.anger = 0
@@ -36,14 +36,21 @@ def angerSet(input):
   client.anger = input
   print("Anger set to: " + str(client.anger))
 
-#Login event
+def angerRandomize(probability):
+  angerChange = random.random() < probability
+  if angerChange == True:
+    client.anger = random.randint(0, 10)
+    print("Anger randomized to: " + str(client.anger))
+
+
+#Login event  
 
 @client.event
 
 async def on_ready():
   print("Logged in as {0.user}".format(client))
 
- #All chat interactions 
+#All chat interactions 
 
 @client.event
 async def on_message(message):
@@ -51,7 +58,7 @@ async def on_message(message):
     return
 
   authorId = message.author.id
-  verifiedUsers = [376158252330647553,285231967048302594]
+
 
 #Help Chat
 
@@ -59,17 +66,16 @@ async def on_message(message):
     await message.channel.send("Hello my liege. How may I serve you?")
   elif message.content.startswith("$help"):
     await message.channel.send("I live only to serve my master. Do be gone.")
-
 #Joffrey Support Chat
 
   if message.content in supportTriggers and authorId in verifiedUsers:
     await message.channel.send(random.choice(supportiveResponse))
+    angerDown(.35)
   elif message.content in supportTriggers and authorId not in verifiedUsers:
     await message.channel.send(unsupportiveResponse[client.anger])
 
 
 #Thank chat
-  joffrey = "joffrey"
 
   for word in joffreyThanks:
     if word in message.content.lower() and joffrey in message.content.lower() and authorId in verifiedUsers:
@@ -89,14 +95,13 @@ async def on_message(message):
       angerUp(.75)
 
 
-
 #Inspiration Chat
-  needInspiration = ["inspire", "inspiration", "motivate", "motivation"]
 
   for word in needInspiration:
     if word in message.content.lower():
       quote = getQuote()
       await message.channel.send(quote)
+      angerDown(.35)
 
 #Nolwen Chat
   if "bruh" in message.content.lower():
@@ -112,6 +117,7 @@ async def on_message(message):
       await message.channel.send("Would you like some tea my lord?")
       await client.wait_for('message', check=wantsTea, timeout = 10)
       await message.channel.send("Here is your tea, sir.")
+      angerDown(.5)
     elif word in message.content.lower() and authorId not in verifiedUsers:
       await message.channel.send(negativeTea[int(client.anger)])
 
@@ -120,7 +126,7 @@ async def on_message(message):
   for word in sleepTriggers:
     if word in message.content.lower() and authorId in verifiedUsers:
       await message.channel.send(random.choice(positiveSleep))
-    elif word in message.content.lower():
+    elif word in message.content.lower() and "sleepy_figg" not in message.content.lower():
       await message.channel.send(negativeSleep[int(client.anger)])
 
 #Swear Jar Chat
@@ -137,7 +143,7 @@ async def on_message(message):
     elif  word in message.content.lower() and authorId in verifiedUsers and word != "whore":
       await message.add_reaction("\N{THUMBS UP SIGN}")
       await message.channel.send(random.choice(respectfulResponse)) 
-
+      angerDown(.25)
 #Anger Override
 
   def angerCheck(message):
@@ -149,13 +155,14 @@ async def on_message(message):
     await message.channel.send("Accepting anger input.")
     await client.wait_for('message', check=angerCheck, timeout = 10)
     await message.channel.send("Anger is now at: " + str(client.anger))
-  
-  resetTriggers = ["reset hypnosis", "joffrey, factory reset", "joffrey factory reset", "joffrey reboot", "joffrey, reboot"]
 
   if message.content.lower() in resetTriggers and authorId in verifiedUsers:
     client.anger = 0
     print("Anger returned to: " + str(client.anger))
     await message.channel.send("Greetings, my liege. I apologize for any former... inconviences.")
+
+  if message.content.lower() in angerInquiry:
+    await message.channel.send("On a scale from 0 to 10, I am at " + str(client.anger) + ".")
 
 
 client.run(token)
