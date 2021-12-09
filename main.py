@@ -108,6 +108,9 @@ async def on_message(message):
     print("bruh")
     await message.channel.send("bruh")
 
+  if message.content.lower() in weirdTriggers:
+    await message.add_reaction("\N{THINKING SIGN}")
+
 #Tea Chat
   def wantsTea(m):
     return m.author == message.author and m.content.lower() in affirmative

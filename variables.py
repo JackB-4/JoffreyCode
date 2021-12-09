@@ -49,3 +49,6 @@ respectfulResponse = ["Such insight.", "What wisdom.", "Your eloquence amazes me
 #Anger Variables
 resetTriggers = ["reset hypnosis","hypnosis reset", "joffrey, factory reset", "joffrey factory reset","factory reset joffrey", "joffrey reboot", "joffrey, reboot"]
 angerInquiry = ["how angry are you joffrey", "joffrey are you angry", "are you angry joffrey", "is joffrey angy"]
+
+#Nolwen Variables
+weirdTriggers = ["gay", "sus"]
