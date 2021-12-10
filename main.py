@@ -1,5 +1,4 @@
-import discord, requests, json, random, threading, queue
-from discord.ext.commands import Bot
+import discord, requests, json, random
 from commands import *
 from variables import *
 token = "OTE1Nzk1NTc4ODg0MDk2MDQx.YagzGA.n58O2SJKo4okdf5idZbbeUW-ZCo"
@@ -47,7 +46,6 @@ def angerRandomize(probability):
 
 async def on_ready():
   print("Logged in as {0.user}".format(client))
-  consoleControl()
 
 #All chat interactions 
 
