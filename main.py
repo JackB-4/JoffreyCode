@@ -1,8 +1,6 @@
-import discord
-import asyncio
-import requests
-import json
-import random
+import discord, requests, json, random, threading, queue
+from discord.ext.commands import Bot
+from commands import *
 from variables import *
 token = "OTE1Nzk1NTc4ODg0MDk2MDQx.YagzGA.n58O2SJKo4okdf5idZbbeUW-ZCo"
 verifiedUsers = [376158252330647553,285231967048302594]
@@ -49,6 +47,7 @@ def angerRandomize(probability):
 
 async def on_ready():
   print("Logged in as {0.user}".format(client))
+  consoleControl()
 
 #All chat interactions 
 
@@ -56,9 +55,7 @@ async def on_ready():
 async def on_message(message):
   if message.author == client.user:
     return
-
   authorId = message.author.id
-
 
 #Help Chat
 
@@ -107,9 +104,6 @@ async def on_message(message):
   if "bruh" in message.content.lower():
     print("bruh")
     await message.channel.send("bruh")
-
-  if message.content.lower() in weirdTriggers:
-    await message.add_reaction("\N{THINKING SIGN}")
 
 #Tea Chat
   def wantsTea(m):
@@ -166,6 +160,5 @@ async def on_message(message):
 
   if message.content.lower() in angerInquiry:
     await message.channel.send("On a scale from 0 to 10, I am at " + str(client.anger) + ".")
-
 
 client.run(token)
