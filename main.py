@@ -2,7 +2,7 @@ import discord, requests, json, random
 from commands import *
 from variables import *
 token = "OTE1Nzk1NTc4ODg0MDk2MDQx.YagzGA.n58O2SJKo4okdf5idZbbeUW-ZCo"
-verifiedUsers = [376158252330647553,285231967048302594]
+verifiedUsers = ["376158252330647553",285231967048302594]
 
 client = discord.Client()
 client.anger = 0
@@ -33,11 +33,14 @@ def angerSet(input):
   client.anger = input
   print("Anger set to: " + str(client.anger))
 
-def angerRandomize(probability):
-  angerChange = random.random() < probability
-  if angerChange == True:
-    client.anger = random.randint(0, 10)
-    print("Anger randomized to: " + str(client.anger))
+def angerRandomize():
+  randomChange = random.randint(-3,3)
+  tempAnger = client.anger + randomChange
+  if tempAnger > 10:
+    tempAnger = 10
+  if tempAnger < 0:
+    tempAnger = 0
+  return tempAnger
 
 
 #Login event  
@@ -67,7 +70,7 @@ async def on_message(message):
     await message.channel.send(random.choice(supportiveResponse))
     angerDown(.35)
   elif message.content in supportTriggers and authorId not in verifiedUsers:
-    await message.channel.send(unsupportiveResponse[client.anger])
+    await message.channel.send(unsupportiveResponse[angerRandomize()])
 
 
 #Thank chat
@@ -86,7 +89,7 @@ async def on_message(message):
       await message.channel.send(message.author.mention + " " + random.choice(positiveResponse))
       angerUp(.2)
     elif word in message.content.lower() and authorId not in verifiedUsers:
-      await message.channel.send(message.author.mention + " " + negativeResponse[client.anger])
+      await message.channel.send(message.author.mention + " " + negativeResponse[angerRandomize()])
       angerUp(.75)
 
 
@@ -102,6 +105,10 @@ async def on_message(message):
   if "bruh" in message.content.lower():
     print("bruh")
     await message.channel.send("bruh")
+  if "gay" in message.content.lower():
+    await message.add_reaction("🇬")
+    await message.add_reaction("🇦")
+    await message.add_reaction("🇾")
 
 #Tea Chat
   def wantsTea(m):
@@ -114,7 +121,7 @@ async def on_message(message):
       await message.channel.send("Here is your tea, sir.")
       angerDown(.5)
     elif word in message.content.lower() and authorId not in verifiedUsers:
-      await message.channel.send(negativeTea[int(client.anger)])
+      await message.channel.send(negativeTea[int(angerRandomize())])
 
 #Sleep Chat
 
@@ -122,7 +129,7 @@ async def on_message(message):
     if word in message.content.lower() and authorId in verifiedUsers and "figg" not in message.content.lower():
       await message.channel.send(random.choice(positiveSleep))
     elif word in message.content.lower() and "figg" not in message.content.lower():
-      await message.channel.send(negativeSleep[int(client.anger)])
+      await message.channel.send(negativeSleep[angerRandomize()])
 
 #Swear Jar Chat
 
@@ -133,7 +140,7 @@ async def on_message(message):
   for word in badWords:
     if word in message.content.lower() and authorId not in verifiedUsers:
       await message.add_reaction("\N{THUMBS DOWN SIGN}")
-      await message.channel.send(strangerResponse[client.anger])
+      await message.channel.send(strangerResponse[angerRandomize()])
       angerUp(.5)
     elif  word in message.content.lower() and authorId in verifiedUsers and word != "whore":
       await message.add_reaction("\N{THUMBS UP SIGN}")
@@ -149,7 +156,7 @@ async def on_message(message):
   if "$anger" in message.content.lower() and authorId in verifiedUsers:
     await message.channel.send("Accepting anger input.")
     await client.wait_for('message', check=angerCheck, timeout = 10)
-    await message.channel.send("Anger is now at: " + str(client.anger))
+    await message.channel.send("Anger is now at: " + str(angerRandomize()))
 
   if message.content.lower() in resetTriggers and authorId in verifiedUsers:
     client.anger = 0
