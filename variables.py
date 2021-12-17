@@ -52,3 +52,6 @@ angerInquiry = ["how angry are you joffrey", "joffrey are you angry", "are you a
 
 #Nolwen Variables
 weirdTriggers = ["gay", "sus"]
+
+#Day Triggers
+dayTriggers = ["whats today", "what's today", "what day is it", "national day"]

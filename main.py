@@ -7,6 +7,16 @@ verifiedUsers = ["376158252330647553",285231967048302594]
 client = discord.Client()
 client.anger = 0
 
+#National Days
+def getDay():
+  dayResponse = requests.get("https://national-api-day.herokuapp.com/api/today")
+  dayData = dayResponse.json()
+  daySeperator = "\n"
+  days = dayData["holidays"]
+  processedDays = daySeperator.join(days)
+  return(processedDays)
+
+
 #Inspiration Quote
 
 def getQuote():
@@ -57,6 +67,12 @@ async def on_message(message):
   if message.author == client.user:
     return
   authorId = message.author.id
+
+#Day Chat
+  for word in dayTriggers:
+    if word in message.content.lower():
+      await message.channel.send(getDay())
+
 
 #Help Chat
 
