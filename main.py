@@ -1,15 +1,19 @@
 import discord, requests, json, random
+from datetime import datetime
 from commands import *
 from variables import *
 token = "OTE1Nzk1NTc4ODg0MDk2MDQx.YagzGA.n58O2SJKo4okdf5idZbbeUW-ZCo"
-verifiedUsers = ["376158252330647553",285231967048302594]
+verifiedUsers = [376158252330647553,285231967048302594]
 
 client = discord.Client()
 client.anger = 0
+current_datetime = datetime.now()
 
 #National Days
 def getDay():
-  dayResponse = requests.get("https://national-api-day.herokuapp.com/api/today")
+  currentMonth = current_datetime.month
+  currentDay = current_datetime.day
+  dayResponse = requests.get("https://national-api-day.herokuapp.com/api/date/" + currentMonth + "/" + currentDay)
   dayData = dayResponse.json()
   daySeperator = "\n"
   days = dayData["holidays"]
