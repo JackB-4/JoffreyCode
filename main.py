@@ -13,7 +13,7 @@ current_datetime = datetime.now()
 def getDay():
   currentMonth = current_datetime.month
   currentDay = current_datetime.day
-  dayResponse = requests.get("https://national-api-day.herokuapp.com/api/date/" + currentMonth + "/" + currentDay)
+  dayResponse = requests.get("https://national-api-day.herokuapp.com/api/date/" + str(currentMonth) + "/" + str(currentDay))
   dayData = dayResponse.json()
   daySeperator = "\n"
   days = dayData["holidays"]
