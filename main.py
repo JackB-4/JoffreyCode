@@ -7,17 +7,19 @@ verifiedUsers = [376158252330647553,285231967048302594]
 
 client = discord.Client()
 client.anger = 0
-current_datetime = datetime.now()
 
 #National Days
 def getDay():
+  current_datetime = datetime.now()
   currentMonth = current_datetime.month
   currentDay = current_datetime.day
+  print(str(currentMonth) + "/" + str(currentDay))
   dayResponse = requests.get("https://national-api-day.herokuapp.com/api/date/" + str(currentMonth) + "/" + str(currentDay))
   dayData = dayResponse.json()
   daySeperator = "\n"
   days = dayData["holidays"]
   processedDays = daySeperator.join(days)
+  print(processedDays)
   return(processedDays)
 
 
