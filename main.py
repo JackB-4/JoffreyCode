@@ -131,6 +131,13 @@ async def on_message(message):
     await message.add_reaction("🇬")
     await message.add_reaction("🇦")
     await message.add_reaction("🇾")
+  if "gamer" in message.content.lower():
+    await message.add_reaction("🇬")
+    await message.add_reaction("🇦")
+    await message.add_reaction("🇾")
+    await message.add_reaction("🇲")
+    await message.add_reaction("🇪")
+    await message.add_reaction("🇷")
 
 #Tea Chat
   def wantsTea(m):
