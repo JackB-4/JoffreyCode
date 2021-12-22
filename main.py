@@ -178,7 +178,7 @@ async def on_message(message):
   if "$anger" in message.content.lower() and authorId in verifiedUsers:
     await message.channel.send("Accepting anger input.")
     await client.wait_for('message', check=angerCheck, timeout = 10)
-    await message.channel.send("Anger is now at: " + str(angerRandomize()))
+    await message.channel.send("Anger is now at: " + str(client.anger))
 
   if message.content.lower() in resetTriggers and authorId in verifiedUsers:
     client.anger = 0
