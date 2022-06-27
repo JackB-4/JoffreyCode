@@ -2,7 +2,7 @@ import discord, requests, json, random
 from datetime import datetime
 from commands import *
 from variables import *
-token = "OTE1Nzk1NTc4ODg0MDk2MDQx.YagzGA.n58O2SJKo4okdf5idZbbeUW-ZCo"
+token = "ENTERTOKENHERE"
 verifiedUsers = [376158252330647553,285231967048302594]
 
 client = discord.Client()
